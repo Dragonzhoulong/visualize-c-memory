@@ -1,0 +1,32 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Make: compile and debug",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/examples/examples",
+			"stopAtEntry": true,
+			"cwd": "${workspaceFolder}/examples",
+			"environment": [
+				{"name":"LD_PRELOAD", "value":"${workspaceFolder}/src/visualize-c-memory.so"},
+			],
+			"externalConsole": false,
+			"linux": {
+				"MIMode": "gdb",
+				"internalConsoleOptions": "neverOpen"				// don't show the debugger console
+			},
+			"setupCommands": [
+				{
+					"description": "Enable pretty-printing for gdb",
+					"text": "-enable-pretty-printing",
+					"ignoreFailures": true
+				},
+				{
+					"text": "source ${workspaceFolder}/src/visualize-c-memory.py"
+				}
+			],
+			"preLaunchTask": "Make: compile",
+		}
+	]
+}
