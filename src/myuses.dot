@@ -1,0 +1,163 @@
+digraph G {
+    layout = fdp
+    graph [rankdir=TB, clusterrank="local"];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded",fillcolor="#80808018", label=""];
+        visualize_c_memory [label="visualize_c_memory", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__MemoryPrinter [label="MemoryPrinter\n(visualize_c_memory.py:12)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__address_within_rec [label="address_within_rec\n(visualize_c_memory.py:192)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__dot_of_heap [label="dot_of_heap\n(visualize_c_memory.py:112)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__dot_of_pointers [label="dot_of_pointers\n(visualize_c_memory.py:143)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__dot_of_stack [label="dot_of_stack\n(visualize_c_memory.py:101)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__find_pointers [label="find_pointers\n(visualize_c_memory.py:225)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__find_pointers_rec [label="find_pointers_rec\n(visualize_c_memory.py:229)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__format_pointer [label="format_pointer\n(visualize_c_memory.py:237)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__infer_heap_types [label="infer_heap_types\n(visualize_c_memory.py:285)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__lookup_address [label="lookup_address\n(visualize_c_memory.py:198)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__lookup_address_rec [label="lookup_address_rec\n(visualize_c_memory.py:205)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__lookup_pointer [label="lookup_pointer\n(visualize_c_memory.py:217)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__lookup_printer [label="lookup_printer\n(visualize_c_memory.py:18)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__rec_of_frame [label="rec_of_frame\n(visualize_c_memory.py:330)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__rec_of_heap [label="rec_of_heap\n(visualize_c_memory.py:240)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__rec_of_value [label="rec_of_value\n(visualize_c_memory.py:354)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__recs_of_stack [label="recs_of_stack\n(visualize_c_memory.py:320)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__rows_of_rec [label="rows_of_rec\n(visualize_c_memory.py:157)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__svg_of_memory [label="svg_of_memory\n(visualize_c_memory.py:44)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__table_of_rows [label="table_of_rows\n(visualize_c_memory.py:124)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory"];
+            visualize_c_memory__visualize_memory [label="visualize_memory\n(visualize_c_memory.py:31)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory__MemoryPrinter {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory.MemoryPrinter"];
+            visualize_c_memory__MemoryPrinter____init__ [label="__init__\n(visualize_c_memory.py:13)", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory__MemoryPrinter {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory.MemoryPrinter"];
+            visualize_c_memory__MemoryPrinter__to_string [label="to_string\n(visualize_c_memory.py:15)", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_visualize_c_memory__dot_of_pointers {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="visualize_c_memory.dot_of_pointers"];
+            visualize_c_memory__dot_of_pointers__anchor_of_rec [label="anchor_of_rec\n(visualize_c_memory.py:145)", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+        }
+    }
+        visualize_c_memory -> visualize_c_memory__lookup_printer [style="solid", color="#000000"];
+        visualize_c_memory__MemoryPrinter__to_string -> visualize_c_memory__visualize_memory [style="solid", color="#000000"];
+        visualize_c_memory__lookup_printer -> visualize_c_memory__MemoryPrinter [style="solid", color="#000000"];
+        visualize_c_memory__lookup_printer -> visualize_c_memory__MemoryPrinter____init__ [style="solid", color="#000000"];
+        visualize_c_memory__visualize_memory -> visualize_c_memory__svg_of_memory [style="solid", color="#000000"];
+        visualize_c_memory__svg_of_memory -> visualize_c_memory__recs_of_stack [style="solid", color="#000000"];
+        visualize_c_memory__svg_of_memory -> visualize_c_memory__rec_of_heap [style="solid", color="#000000"];
+        visualize_c_memory__svg_of_memory -> visualize_c_memory__dot_of_stack [style="solid", color="#000000"];
+        visualize_c_memory__svg_of_memory -> visualize_c_memory__dot_of_pointers [style="solid", color="#000000"];
+        visualize_c_memory__svg_of_memory -> visualize_c_memory__infer_heap_types [style="solid", color="#000000"];
+        visualize_c_memory__svg_of_memory -> visualize_c_memory__dot_of_heap [style="solid", color="#000000"];
+        visualize_c_memory__dot_of_stack -> visualize_c_memory__table_of_rows [style="solid", color="#000000"];
+        visualize_c_memory__dot_of_stack -> visualize_c_memory__rows_of_rec [style="solid", color="#000000"];
+        visualize_c_memory__dot_of_heap -> visualize_c_memory__table_of_rows [style="solid", color="#000000"];
+        visualize_c_memory__dot_of_heap -> visualize_c_memory__rows_of_rec [style="solid", color="#000000"];
+        visualize_c_memory__dot_of_pointers -> visualize_c_memory__dot_of_pointers__anchor_of_rec [style="solid", color="#000000"];
+        visualize_c_memory__dot_of_pointers -> visualize_c_memory__lookup_address [style="solid", color="#000000"];
+        visualize_c_memory__dot_of_pointers -> visualize_c_memory__find_pointers [style="solid", color="#000000"];
+        visualize_c_memory__rows_of_rec -> visualize_c_memory__lookup_address [style="solid", color="#000000"];
+        visualize_c_memory__rows_of_rec -> visualize_c_memory__rows_of_rec [style="solid", color="#000000"];
+        visualize_c_memory__lookup_address -> visualize_c_memory__lookup_address_rec [style="solid", color="#000000"];
+        visualize_c_memory__lookup_address_rec -> visualize_c_memory__address_within_rec [style="solid", color="#000000"];
+        visualize_c_memory__lookup_address_rec -> visualize_c_memory__lookup_address_rec [style="solid", color="#000000"];
+        visualize_c_memory__lookup_pointer -> visualize_c_memory__find_pointers [style="solid", color="#000000"];
+        visualize_c_memory__find_pointers -> visualize_c_memory__find_pointers_rec [style="solid", color="#000000"];
+        visualize_c_memory__find_pointers_rec -> visualize_c_memory__find_pointers_rec [style="solid", color="#000000"];
+        visualize_c_memory__rec_of_heap -> visualize_c_memory__format_pointer [style="solid", color="#000000"];
+        visualize_c_memory__infer_heap_types -> visualize_c_memory__rec_of_value [style="solid", color="#000000"];
+        visualize_c_memory__infer_heap_types -> visualize_c_memory__infer_heap_types [style="solid", color="#000000"];
+        visualize_c_memory__infer_heap_types -> visualize_c_memory__lookup_pointer [style="solid", color="#000000"];
+        visualize_c_memory__recs_of_stack -> visualize_c_memory__rec_of_frame [style="solid", color="#000000"];
+        visualize_c_memory__rec_of_frame -> visualize_c_memory__rec_of_value [style="solid", color="#000000"];
+        visualize_c_memory__rec_of_value -> visualize_c_memory__format_pointer [style="solid", color="#000000"];
+        visualize_c_memory__rec_of_value -> visualize_c_memory__rec_of_value [style="solid", color="#000000"];
+    }

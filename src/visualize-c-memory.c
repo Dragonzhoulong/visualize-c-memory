@@ -23,7 +23,7 @@ typedef struct heap_node {
 } heap_node;
 static heap_node heap_contents = { .next = NULL };		// dummy node of a linked list of heap_node
 
-static void insert_pointer(void* pointer, int size, char source) {
+static void my_insert_pointer(void* pointer, int size, char source) {
 	heap_node* node = __libc_malloc(sizeof(*node));
 	node->pointer = pointer;
 	node->size = size;
@@ -33,7 +33,7 @@ static void insert_pointer(void* pointer, int size, char source) {
 	heap_contents.next = node;
 }
 
-static void update_pointer(void* pointer, int size, char source, void* old_pointer) {
+static void my_update_pointer(void* pointer, int size, char source, void* old_pointer) {
 	// for realloc, update the existing entry (to remain in the same position)
 	for(heap_node* node = heap_contents.next; node != NULL; node = node->next) {
 		if(node->pointer == old_pointer) {
@@ -45,7 +45,7 @@ static void update_pointer(void* pointer, int size, char source, void* old_point
 	}
 }
 
-static void remove_pointer(void* pointer) {
+static void my_remove_pointer(void* pointer) {
 	// remove from the heap_contents list
 	for(heap_node* prev = &heap_contents; prev != NULL; prev = prev->next) {
 		heap_node* node = prev->next;
@@ -54,6 +54,7 @@ static void remove_pointer(void* pointer) {
 			__libc_free(node);
 			break;
 		}
+		// __libc_free(node);
 	}
 }
 
@@ -65,24 +66,25 @@ void* malloc(size_t size) {
 
 	// libc seems to allocte 1024 bytes on start for its own use. Ignore it.
 	if(!(heap_contents.next == NULL && size == 1024))
-		insert_pointer(pointer, size, 'm');
+		my_insert_pointer(pointer, size, 'm');
 
 	return pointer;
 }
 
 void* realloc(void* old_pointer, size_t size) {
 	void* pointer = __libc_realloc(old_pointer, size);
-	update_pointer(pointer, size, 'r', old_pointer);
+	my_update_pointer(pointer, size, 'r', old_pointer);
+	__libc_free(old_pointer);
 	return pointer;
 }
 
 void* calloc(size_t n, size_t size) {
 	void* pointer = __libc_calloc(n, size);
-	insert_pointer(pointer, n * size, 'c');
+	my_insert_pointer(pointer, n * size, 'c');
 	return pointer;
 }
 
 void free(void* pointer) {
-	remove_pointer(pointer);
+	my_remove_pointer(pointer);
 	__libc_free(pointer);
 }

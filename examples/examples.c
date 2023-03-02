@@ -122,18 +122,27 @@ void memory_leak_example() {
 
 	free(my_int);
 }
+void realloc_example(){
+	int* my_int;
+	int* my_new_int;	
+	my_int = malloc(sizeof(*my_int));
+	my_new_int = realloc(my_int,sizeof(int));
+
+}
 
 	
 
 int main() {
-	local_vars_example();
-	pointer_example();
-	swap_example(); 
- 	malloc_example();
-	string_example();
-	recursion_example();
+	
+	// realloc_example();
+	// local_vars_example();
+	// pointer_example();
+	// swap_example(); 
+ 	// malloc_example();
+	// string_example();
+	// recursion_example();
 	list_example();
-	memory_leak_example();
+	// memory_leak_example();
 
 	printf("\nVisualization examples. To display them, start debugging (F5),\n");
 	printf("open Debug Visualizer and type \"memory\" in the window that opens.\n\n");

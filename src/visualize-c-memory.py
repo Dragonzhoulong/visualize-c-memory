@@ -67,13 +67,6 @@ def svg_of_memory():
         }}
     """
 
-    # debugging
-    # print(dot)
-    # return json.dumps({
-    #     'kind': { 'text': True },
-    #     'text': dot,
-    # })
-
     # vscode-debug-visualizer can directly display graphviz dot format. However
     # its implementation has issues when the visualization is updated, after the
     # update it's often corrupted. Maybe this has to do with the fact that
@@ -88,14 +81,14 @@ def svg_of_memory():
 
     if svg.returncode != 0:
         raise Exception(f"dot failed:\n {svg.stderr.decode('utf-8')}\n\ndot source:\n{dot}")
-    # ## 不想输出图片可以注释该段
-    # global call_count_for_Svg 
-    # call_count_for_Svg += 1
-    # filename = f"memory_{call_count_for_Svg}.svg"
-    # filepath = "../out/"+filename
-    # with open(filepath,'w') as f:
-    #     f.write(svg.stdout.decode('utf-8'))
-    # ## 每次运行前在example文件夹内make clean_out一下情况输出文件夹
+    ## 不想输出图片可以注释该段
+    global call_count_for_Svg 
+    call_count_for_Svg += 1
+    filename = f"memory_{call_count_for_Svg}.svg"
+    filepath = "../out/"+filename
+    with open(filepath,'w') as f:
+        f.write(svg.stdout.decode('utf-8'))
+    ## 每次运行前在example文件夹内make clean_out一下情况输出文件夹
     return svg.stdout.decode('utf-8')
 
 def dot_of_stack(memory):
@@ -235,7 +228,7 @@ def find_pointers_rec(rec):
         return []
 
 def format_pointer(val):
-    return hex(int(val)).replace('0x', "") if val is not None else ""
+    return hex(int(val)).replace('0x',"0x") if val is not None else ""
 
 def rec_of_heap():
     # we return a 'frame' rec
@@ -256,7 +249,7 @@ def rec_of_heap():
             "     LD_PRELOAD=<path-to>/visualize-c-memory.so\n"
             "_or_ link your program with visualize-c-memory.c"
         )
-
+    #当堆区不为空,即heap_contents->next !=null
     while int(heap_node_ptr) != 0:
         # read node from the linked list
         heap_node = heap_node_ptr.dereference()
@@ -328,11 +321,14 @@ def recs_of_stack():
     return res
 
 def rec_of_frame(frame):
+    #frame表示当前帧
     # we want blocks in reverse order, but symbols within the block in the correct order!
     blocks = [frame.block()]
+
     while blocks[0].function is None:
         blocks.insert(0, blocks[0].superblock)
-
+    #定义rec字典,收集当前帧的信息,包括function().name,
+    #收集的局部变量和参数列表均是symb,symb.name即这些名称,symb.value
     rec = {
         'kind': 'frame',
         'name': frame.function().name,
@@ -350,7 +346,14 @@ def rec_of_frame(frame):
             rec['values'].append(rec_of_value(symb.value(frame), 'stack'))
 
     return rec
-
+# 这是一个用于将GDB值转换为可读格式的函数。
+# 它将值转换为一个Python字典，其中包含有关该值的有用信息，例如类型、大小和地址等。
+# 在这个函数中，它检查值的类型代码，
+# 如果是数组，则迭代数组的元素并递归调用自身，将结果存储在'rec'字典的'values'键下。
+# 如果是结构体，则类似地迭代其字段并递归调用自身，将结果存储在'rec'字典的'fields'和'values'键下。
+# 对于指针和函数指针，它将它们视为标量值并将它们的十六进制值转换为字符串。
+# 最后，对于其他类型的值，
+# 它将尝试使用'format_string()'方法将值转换为字符串，并将结果存储在'rec'字典的'value'键下。
 def rec_of_value(value, area):
     type = value.type.strip_typedefs()
     rec = {
@@ -363,6 +366,7 @@ def rec_of_value(value, area):
     if type.code == gdb.TYPE_CODE_ARRAY:
         # stack arrays of dynamic length (eg int foo[n]) might have huge size before the
         # initialization code runs! In this case replace type with one of size 0
+        # 初始化代码运行之前,堆栈数组也许非常巨大,在检测到这种情况时将数组的大小设为-1,即未知
         if int(type.sizeof) > 1000:
             type = type.target().array(-1)
 
@@ -373,13 +377,15 @@ def rec_of_value(value, area):
 
     elif type.code == gdb.TYPE_CODE_STRUCT:
         rec['fields'] = [field.name for field in type.fields()]
+        #递归的得到结构体里的所有字段的值
         rec['values'] = [rec_of_value(value[field], area) for field in type.fields()]
         rec['kind'] = 'struct'
 
     else:
         # treat function pointers as scalar values
-        is_pointer = type.code == gdb.TYPE_CODE_PTR
-        func_pointer = is_pointer and type.target().code == gdb.TYPE_CODE_FUNC
+        #判断当前变量是否为指针,是否为函数指针
+        is_pointer = (type.code == gdb.TYPE_CODE_PTR)
+        func_pointer = (is_pointer and type.target().code == gdb.TYPE_CODE_FUNC)
 
         if is_pointer and not func_pointer:
             rec['value'] = format_pointer(value)
@@ -394,3 +400,5 @@ def rec_of_value(value, area):
                 rec['value'] = rec['value'].replace("0x", "").replace(" ", "<br/>")
 
     return rec
+
+
